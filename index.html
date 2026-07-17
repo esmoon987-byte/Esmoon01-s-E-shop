@@ -24,7 +24,6 @@
             padding-bottom: 60px;
         }
 
-        /* Header Accent Banner */
         .top-accent {
             height: 6px;
             background: linear-gradient(90deg, #55ff55, #33aa33);
@@ -59,14 +58,12 @@
             margin: 0 auto;
         }
 
-        /* Main Layout Container */
         .container {
             max-width: 1100px;
             margin: 30px auto;
             padding: 0 20px;
         }
 
-        /* Utility Floating Cart Bar Header */
         .cart-trigger-container {
             text-align: right;
             margin-bottom: 20px;
@@ -90,13 +87,6 @@
             border-color: #666666;
         }
 
-        .btn-cart-toggle:active {
-            border: 3px solid #222222;
-            border-top-color: #555555;
-            border-left-color: #555555;
-        }
-
-        /* Products Grid */
         .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -118,7 +108,6 @@
         .product-card:hover {
             transform: translateY(-4px);
             border-color: #55ff55;
-            box-shadow: 0 0 12px rgba(85, 255, 85, 0.2);
         }
 
         .product-image {
@@ -148,7 +137,6 @@
             color: #aaa;
             margin-bottom: 12px;
             text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
         .product-rarity.epic { color: #ff55ff; }
@@ -178,10 +166,8 @@
         .btn-add:hover {
             background-color: #55ff55;
             color: #000;
-            border-color: #aaffaa;
         }
 
-        /* Sidebar Cart Panel */
         .cart-sidebar {
             position: fixed;
             top: 0;
@@ -222,7 +208,6 @@
             color: #ff5555;
             font-size: 20pt;
             cursor: pointer;
-            font-weight: bold;
         }
 
         .cart-items-container {
@@ -235,7 +220,6 @@
             text-align: center;
             color: #777;
             margin-top: 40px;
-            font-style: italic;
         }
 
         .cart-item {
@@ -258,26 +242,17 @@
             flex: 1;
         }
 
-        .cart-item-title {
-            font-weight: bold;
-            font-size: 10pt;
-        }
-
-        .cart-item-price {
-            color: #ffff55;
-            font-size: 9pt;
-        }
-
+        .cart-item-title { font-weight: bold; font-size: 10pt; }
+        .cart-item-price { color: #ffff55; font-size: 9pt; }
+        
         .cart-item-remove {
             background: none;
             border: none;
             color: #ff5555;
             cursor: pointer;
             font-weight: bold;
-            padding: 5px;
         }
 
-        /* Cart Footer Form & Output */
         .cart-footer {
             padding: 20px;
             background-color: #111111;
@@ -290,7 +265,6 @@
             font-size: 12pt;
             font-weight: bold;
             margin-bottom: 15px;
-            color: #fff;
         }
 
         .cart-total-price {
@@ -299,79 +273,38 @@
             font-size: 20pt;
         }
 
-        /* Form Inputs */
-        .form-group {
-            margin-bottom: 12px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 9pt;
-            color: #aaa;
-            margin-bottom: 6px;
-            text-transform: uppercase;
-        }
-
+        .form-group { margin-bottom: 12px; }
+        .form-group label { display: block; font-size: 8pt; color: #aaa; margin-bottom: 6px; text-transform: uppercase; }
+        
         .form-input {
             width: 100%;
             background-color: #252525;
             border: 2px solid #444;
             color: #fff;
             padding: 10px;
-            font-family: inherit;
         }
 
-        .form-input:focus {
-            border-color: #55ff55;
-            outline: none;
-        }
-
-        /* MC Command Copy Section */
         .command-box-container {
             background-color: #050505;
             border: 1px dashed #555;
             padding: 10px;
             margin-bottom: 15px;
-            border-radius: 4px;
-            display: none; /* Shown when items are in cart */
+            display: none;
         }
 
-        .command-label {
-            font-size: 8pt;
-            color: #ffaa00;
-            margin-bottom: 4px;
-            font-weight: bold;
+        .command-label { font-size: 8pt; color: #ffaa00; margin-bottom: 4px; font-weight: bold; }
+        .command-text-row { display: flex; align-items: center; }
+        .command-code { font-family: monospace; color: #55ff55; font-size: 9pt; flex: 1; overflow-x: auto; }
+        
+        .btn-copy { background-color: #333; border: 1px solid #555; color: #fff; font-size: 8pt; padding: 4px 8px; cursor: pointer; }
+
+        .file-input-wrapper {
+            background-color: #2c2c2c;
+            border: 2px dashed #555;
+            padding: 10px;
+            text-align: center;
         }
 
-        .command-text-row {
-            display: flex;
-            align-items: center;
-        }
-
-        .command-code {
-            font-family: monospace;
-            color: #55ff55;
-            font-size: 9pt;
-            white-space: nowrap;
-            overflow-x: auto;
-            flex: 1;
-            padding-right: 5px;
-        }
-
-        .btn-copy {
-            background-color: #333;
-            border: 1px solid #555;
-            color: #fff;
-            font-size: 8pt;
-            padding: 4px 8px;
-            cursor: pointer;
-        }
-
-        .btn-copy:hover {
-            background-color: #444;
-        }
-
-        /* Order Button */
         .btn-order {
             width: 100%;
             background-color: #55ff55;
@@ -381,46 +314,19 @@
             border-right-color: #22aa22;
             padding: 14px;
             font-family: 'Press Start 2P', cursive;
-            font-size: 9pt;
+            font-size: 8pt;
             cursor: pointer;
-            transition: all 0.1s;
+            margin-top: 10px;
         }
 
-        .btn-order:hover {
-            background-color: #66ff66;
-        }
+        .btn-order:disabled { background-color: #444; border-color: #555; color: #777; cursor: not-allowed; }
 
-        .btn-order:disabled {
-            background-color: #444;
-            border-color: #555;
-            color: #777;
-            cursor: not-allowed;
-        }
-
-        /* Overlay */
         .cart-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.6);
-            z-index: 999;
-            display: none;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.6); z-index: 999; display: none;
         }
-
-        .cart-overlay.open {
-            display: block;
-        }
-
-        footer {
-            text-align: center;
-            color: #555;
-            font-size: 9pt;
-            margin-top: 40px;
-            padding: 20px;
-            border-top: 1px solid #222;
-        }
+        .cart-overlay.open { display: block; }
+        footer { text-align: center; color: #555; font-size: 9pt; margin-top: 40px; padding: 20px; }
     </style>
 </head>
 <body>
@@ -430,7 +336,7 @@
     <header>
         <div class="logo-container">
             <h1>MINE<span>MART</span></h1>
-            <p>Vyber si herní předměty, zadej doručovací souřadnice tvé truhly na serveru, zaplať příkazem a my ti je doručíme.</p>
+            <p>Vyber si předměty, zaplať na serveru přes /pay, nahraj screenshot jako důkaz a odešli to zcela zdarma.</p>
         </div>
     </header>
 
@@ -440,24 +346,17 @@
                 Košík (<span id="cart-count-nav">0</span>)
             </button>
         </div>
-
-        <!-- Products Container -->
-        <div class="products-grid" id="products-grid">
-            <!-- Dynamic Injection -->
-        </div>
+        <div class="products-grid" id="products-grid"></div>
     </div>
 
-    <!-- Sidebar Cart -->
     <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
     <div class="cart-sidebar" id="cart-sidebar">
         <div class="cart-header">
-            <h2><span style="color:#ffaa00">🛒</span> TVŮJ KOŠÍK</h2>
+            <h2>🛒 TVŮJ KOŠÍK</h2>
             <button class="btn-close-cart" onclick="toggleCart()">&times;</button>
         </div>
 
-        <div class="cart-items-container" id="cart-items-container">
-            <!-- Dynamic Cart Items -->
-        </div>
+        <div class="cart-items-container" id="cart-items-container"></div>
 
         <div class="cart-footer">
             <div class="cart-total">
@@ -465,7 +364,6 @@
                 <span class="cart-total-price" id="cart-total-price">0 $</span>
             </div>
 
-            <!-- MC Command Field -->
             <div class="command-box-container" id="command-box-container">
                 <div class="command-label">KROK 1: ZAPLAŤ NA SERVERU</div>
                 <div class="command-text-row">
@@ -474,7 +372,6 @@
                 </div>
             </div>
 
-            <!-- Checkout Form -->
             <form id="checkout-form" onsubmit="handleCheckout(event)">
                 <div class="form-group">
                     <label for="player-name">Tvoje Herní Jméno (Nick)</label>
@@ -484,155 +381,165 @@
                     <label for="player-coords">Doručovací souřadnice (X, Y, Z)</label>
                     <input type="text" id="player-coords" class="form-input" placeholder="Např. X: 120, Y: 64, Z: -350" required>
                 </div>
-                <button type="submit" class="btn-order" id="btn-submit-order" disabled>
-                    ODESLAT OBJEDNÁVKU
-                </button>
+                <div class="form-group">
+                    <label for="player-proof">KROK 2: SCREENSHOT PLATBY</label>
+                    <div class="file-input-wrapper">
+                        <input type="file" id="player-proof" accept="image/*" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn-order" id="btn-submit-order" disabled>ODESLAT OBJEDNÁVKU</button>
             </form>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2026 MineMart. Minecraft je ochranná známka Mojang Synergies AB. Tento web je fiktivní/komunitní obchod.</p>
+        <p>&copy; 2026 MineMart. Minecraft je ochranná známka Mojang Synergies AB.</p>
     </footer>
 
     <script>
-        // --- CONFIGURATION & DATA ---
-        // INITIALIZE EMAILJS - change the Public Key after registration
+        // --- KONFIGURACE ---
+        // VLOŽ SVŮJ VEŘEJNÝ KLÍČ Z EMAILJS
         (function() {
-            emailjs.init("1LcJtROefWISQLPUK"); 
+            emailjs.init("YOUR_EMAILJS_PUBLIC_KEY"); 
         })();
 
         const PRODUCTS = [
-            { id: 1, name: "Diamantový Meč", price: 150, rarity: "epic", img: "https://minecraft.wiki/w/Special:FilePath/Diamond_Sword.png" },
+            { id: 1, name: "Diamantový Meč", price: 1500, rarity: "epic", img: "https://minecraft.wiki/w/Special:FilePath/Diamond_Sword.png" },
             { id: 2, name: "Netheritový Ingot", price: 3000, rarity: "epic", img: "https://minecraft.wiki/w/Special:FilePath/Netherite_Ingot.png" },
             { id: 3, name: "Zlaté Jablko (Enchanted)", price: 2500, rarity: "epic", img: "https://minecraft.wiki/w/Special:FilePath/Enchanted_Golden_Apple.png" },
             { id: 4, name: "Krumpáč Efektivnost V", price: 1200, rarity: "rare", img: "https://minecraft.wiki/w/Special:FilePath/Diamond_Pickaxe.png" },
             { id: 5, name: "Ender Perla (16ks)", price: 400, rarity: "common", img: "https://minecraft.wiki/w/Special:FilePath/Ender_Pearl.png" },
-            { id: 6, name: "Tajemná Truhla s překvapením", price: 800, rarity: "rare", img: "https://minecraft.wiki/w/Special:FilePath/Chest.png" },
+            { id: 6, name: "Tajemná Truhla", price: 800, rarity: "rare", img: "https://minecraft.wiki/w/Special:FilePath/Chest.png" },
             { id: 7, name: "Totem Nesmrtelnosti", price: 2000, rarity: "rare", img: "https://minecraft.wiki/w/Special:FilePath/Totem_of_Undying.png" },
-            { id: 8, name: "Nákovu", price: 300, rarity: "common", img: "https://minecraft.wiki/w/Special:FilePath/Anvil.png" }
+            { id: 8, name: "Nákova", price: 300, rarity: "common", img: "https://minecraft.wiki/w/Special:FilePath/Anvil.png" }
         ];
 
         let cart = [];
 
-        // --- APP LOGIC ---
-
-        // Render products grid
         function renderProducts() {
             const grid = document.getElementById('products-grid');
             grid.innerHTML = PRODUCTS.map(p => `
                 <div class="product-card">
                     <div class="product-rarity ${p.rarity}">${p.rarity}</div>
-                    <div class="product-image">
-                        <img src="${p.img}" alt="${p.name}" onerror="this.src='https://minecraft.wiki/w/Special:FilePath/Barrier.png'">
-                    </div>
+                    <div class="product-image"><img src="${p.img}" alt="${p.name}"></div>
                     <div class="product-title">${p.name}</div>
-                    <div class="product-price">${p.price.toLocaleString()} $</div>
+                    <div class="product-price">${p.price} $</div>
                     <button class="btn-add" onclick="addToCart(${p.id})">Přidat</button>
                 </div>
             `).join('');
         }
 
-        // Toggle Sidebar Cart Visibility
         function toggleCart() {
             document.getElementById('cart-sidebar').classList.toggle('open');
             document.getElementById('cart-overlay').classList.toggle('open');
         }
 
-        // Add item to shopping cart array
         function addToCart(productId) {
             const product = PRODUCTS.find(p => p.id === productId);
-            if (product) {
-                cart.push(product);
-                updateCartUI();
-                // Brief alert feedback styled or vanilla
-            }
+            if (product) { cart.push(product); updateCartUI(); }
         }
 
-        // Remove item from cart array
         function removeFromCart(index) {
-            cart.splice(index, 1);
-            updateCartUI();
+            cart.splice(index, 1); updateCartUI();
         }
 
-        // Update the visual contents of the sidebar
         function updateCartUI() {
-            // Count
             document.getElementById('cart-count-nav').innerText = cart.length;
-            
             const container = document.getElementById('cart-items-container');
             const commandBox = document.getElementById('command-box-container');
             const submitBtn = document.getElementById('btn-submit-order');
 
             if (cart.length === 0) {
-                container.innerHTML = '<div class="cart-empty-msg">Tvůj košík zeje prázdnotou...</div>';
+                container.innerHTML = '<div class="cart-empty-msg">Tvůj košík je prázdný...</div>';
                 document.getElementById('cart-total-price').innerText = "0 $";
                 commandBox.style.display = "none";
                 submitBtn.disabled = true;
                 return;
             }
 
-            // Render list
             container.innerHTML = cart.map((item, index) => `
                 <div class="cart-item">
-                    <img class="cart-item-img" src="${item.img}" alt="${item.name}">
+                    <img class="cart-item-img" src="${item.img}">
                     <div class="cart-item-details">
                         <div class="cart-item-title">${item.name}</div>
-                        <div class="cart-item-price">${item.price.toLocaleString()} $</div>
+                        <div class="cart-item-price">${item.price} $</div>
                     </div>
                     <button class="cart-item-remove" onclick="removeFromCart(${index})">✕</button>
                 </div>
             `).join('');
 
-            // Calculate total
             const total = cart.reduce((sum, item) => sum + item.price, 0);
-            document.getElementById('cart-total-price').innerText = total.toLocaleString() + " $";
-
-            // Update & Show Minecraft command
+            document.getElementById('cart-total-price').innerText = total + " $";
             document.getElementById('command-code').innerText = `/pay Esmoon01 ${total}`;
             commandBox.style.display = "block";
             submitBtn.disabled = false;
         }
 
-        // Copy command helper
         function copyCommand() {
-            const commandText = document.getElementById('command-code').innerText;
-            navigator.clipboard.writeText(commandText).then(() => {
-                alert("Příkaz zkopírován do schránky! Teď ho vlož do chatu v Minecraftu.");
-            }).catch(err => {
-                console.error("Selhalo kopírování: ", err);
+            navigator.clipboard.writeText(document.getElementById('command-code').innerText);
+            alert("Příkaz zkopírován do schránky!");
+        }
+
+        // TATO FUNKCE OBRÁZEK MASIVNĚ ZMENŠÍ, ABY BYL E-MAIL ZDARMA
+        function resizeAndCompressImage(file) {
+            return new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = function (event) {
+                    const img = new Image();
+                    img.src = event.target.result;
+                    img.onload = function () {
+                        const canvas = document.createElement('canvas');
+                        // Zmenšíme rozlišení pro minimální velikost v KB
+                        const MAX_WIDTH = 320; 
+                        const scaleSize = MAX_WIDTH / img.width;
+                        canvas.width = MAX_WIDTH;
+                        canvas.height = img.height * scaleSize;
+
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                        
+                        // Uložíme jako vysoce komprimovaný JPG (kvalita 0.4 zaručí velikost okolo 10-15KB)
+                        const dataUrl = canvas.toDataURL('image/jpeg', 0.4);
+                        resolve(dataUrl);
+                    };
+                };
             });
         }
 
-        // Send Email via EmailJS
-        function handleCheckout(e) {
+        async function handleCheckout(e) {
             e.preventDefault();
 
             const nick = document.getElementById('player-name').value;
             const coords = document.getElementById('player-coords').value;
+            const fileInput = document.getElementById('player-proof');
             const total = cart.reduce((sum, item) => sum + item.price, 0);
-            
-            // Build text list of items purchased
-            const itemsList = cart.map(item => `- ${item.name} (${item.price} $)`).join('\n');
+            const itemsList = cart.map(item => `- ${item.name}`).join('\n');
 
-            // Send parameters matching EmailJS template fields
+            const submitBtn = document.getElementById('btn-submit-order');
+            submitBtn.innerText = "CHVÍLI STRPENÍ...";
+            submitBtn.disabled = true;
+
+            let finalImageText = "Žádný obrázek nebyl nahrán.";
+            if (fileInput.files.length > 0) {
+                // Obrázek se bleskově zmenší v prohlížeči hráče
+                finalImageText = await resizeAndCompressImage(fileInput.files[0]);
+            }
+
             const templateParams = {
                 to_email: 'esmoon987@gmail.com',
                 player_name: nick,
                 coordinates: coords,
                 total_price: total + " $",
                 items_ordered: itemsList,
-                pay_command: `/pay Esmoon01 ${total}`
+                pay_command: `/pay Esmoon01 ${total}`,
+                proof_img: finalImageText // Pošle se jako odkaz/text zdarma
             };
 
-            const submitBtn = document.getElementById('btn-submit-order');
-            submitBtn.innerText = "ODESÍLÁM...";
-            submitBtn.disabled = true;
-
-            // Note: Update SERVICE_ID and TEMPLATE_ID with real values from EmailJS dashboard
-            emailjs.send('service_zedm13r', 'template_xbcvoe9', templateParams)
-                .then(function(response) {
-                    alert('Objednávka byla úspěšně odeslána! Nezapomeň provést platbu ve hře.');
+            // ZDE VLOŽ SVÉ SERVICE_ID A TEMPLATE_ID Z EMAILJS
+            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+                .then(function() {
+                    alert('Objednávka úspěšně odeslána! Jakmile platbu zkontroluji, věci ti doručím.');
                     cart = [];
                     updateCartUI();
                     document.getElementById('checkout-form').reset();
@@ -640,17 +547,13 @@
                     submitBtn.innerText = "ODESLAT OBJEDNÁVKU";
                 }, function(error) {
                     console.error('FAILED...', error);
-                    alert('Chyba při odesílání objednávky přes EmailJS. Zkontrolujte konfiguraci klíčů.');
+                    alert('Chyba odesílání. Zkontroluj klíče v kódu.');
                     submitBtn.innerText = "ODESLAT OBJEDNÁVKU";
                     submitBtn.disabled = false;
                 });
         }
 
-        // Run on load
-        window.onload = function() {
-            renderProducts();
-            updateCartUI();
-        };
+        window.onload = function() { renderProducts(); updateCartUI(); };
     </script>
 </body>
 </html>
