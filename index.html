@@ -336,7 +336,7 @@
     <header>
         <div class="logo-container">
             <h1>MINE<span>MART</span></h1>
-            <p>Vyber si předměty, zaplať na serveru přes /pay, nahraj screenshot jako důkaz a odešli to zcela zdarma.</p>
+            <p>Vyber si předměty, zaplať na serveru přes /pay, nahraj screenshot a obrázek se ukáže přímo v e-mailu zdarma.</p>
         </div>
     </header>
 
@@ -480,7 +480,6 @@
             alert("Příkaz zkopírován do schránky!");
         }
 
-        // TATO FUNKCE OBRÁZEK MASIVNĚ ZMENŠÍ, ABY BYL E-MAIL ZDARMA
         function resizeAndCompressImage(file) {
             return new Promise((resolve) => {
                 const reader = new FileReader();
@@ -490,8 +489,7 @@
                     img.src = event.target.result;
                     img.onload = function () {
                         const canvas = document.createElement('canvas');
-                        // Zmenšíme rozlišení pro minimální velikost v KB
-                        const MAX_WIDTH = 320; 
+                        const MAX_WIDTH = 300; 
                         const scaleSize = MAX_WIDTH / img.width;
                         canvas.width = MAX_WIDTH;
                         canvas.height = img.height * scaleSize;
@@ -499,8 +497,7 @@
                         const ctx = canvas.getContext('2d');
                         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
                         
-                        // Uložíme jako vysoce komprimovaný JPG (kvalita 0.4 zaručí velikost okolo 10-15KB)
-                        const dataUrl = canvas.toDataURL('image/jpeg', 0.4);
+                        const dataUrl = canvas.toDataURL('image/jpeg', 0.3);
                         resolve(dataUrl);
                     };
                 };
@@ -520,9 +517,8 @@
             submitBtn.innerText = "CHVÍLI STRPENÍ...";
             submitBtn.disabled = true;
 
-            let finalImageText = "Žádný obrázek nebyl nahrán.";
+            let finalImageText = "";
             if (fileInput.files.length > 0) {
-                // Obrázek se bleskově zmenší v prohlížeči hráče
                 finalImageText = await resizeAndCompressImage(fileInput.files[0]);
             }
 
@@ -533,7 +529,7 @@
                 total_price: total + " $",
                 items_ordered: itemsList,
                 pay_command: `/pay Esmoon01 ${total}`,
-                proof_img: finalImageText // Pošle se jako odkaz/text zdarma
+                proof_img: finalImageText 
             };
 
             // ZDE VLOŽ SVÉ SERVICE_ID A TEMPLATE_ID Z EMAILJS
