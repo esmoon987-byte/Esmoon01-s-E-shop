@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MineMart - Herní Obchod</title>
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <style>
+        /* Minecraft Web Style */
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Ubuntu:wght@400;700&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #1a1a1a;
+            background-image: url('https://www.transparenttextures.com/patterns/dark-matter.png');
+            color: #f0f0f0;
+            font-family: 'Ubuntu', sans-serif;
+            padding-bottom: 60px;
+        }
+
+        /* Header Accent Banner */
+        .top-accent {
+            height: 6px;
+            background: linear-gradient(90deg, #55ff55, #33aa33);
+            width: 100%;
+        }
+
+        header {
+            background-color: #111111;
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 4px solid #222222;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        .logo-container h1 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 24pt;
+            color: #ffffff;
+            text-shadow: 3px 3px 0px #3f3f3f;
+            margin-bottom: 10px;
+        }
+
+        .logo-container h1 span {
+            color: #55ff55;
+            text-shadow: 3px 3px 0px #11aa11;
+        }
+
+        header p {
+            font-size: 11pt;
+            color: #aaaaaa;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Layout Container */
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* Utility Floating Cart Bar Header */
+        .cart-trigger-container {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .btn-cart-toggle {
+            background-color: #3c3c3c;
+            border: 3px solid #555555;
+            border-bottom-color: #222222;
+            border-right-color: #222222;
+            color: #ffffff;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 10pt;
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: all 0.1s ease;
+        }
+
+        .btn-cart-toggle:hover {
+            background-color: #4a4a4a;
+            border-color: #666666;
+        }
+
+        .btn-cart-toggle:active {
+            border: 3px solid #222222;
+            border-top-color: #555555;
+            border-left-color: #555555;
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .product-card {
+            background-color: #262626;
+            border: 3px solid #3c3c3c;
+            border-bottom-color: #151515;
+            border-right-color: #151515;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            border-color: #55ff55;
+            box-shadow: 0 0 12px rgba(85, 255, 85, 0.2);
+        }
+
+        .product-image {
+            width: 64px;
+            height: 64px;
+            margin: 10px auto 20px auto;
+            image-rendering: pixelated;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-image img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .product-title {
+            font-weight: bold;
+            font-size: 13pt;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .product-rarity {
+            font-size: 9pt;
+            color: #aaa;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .product-rarity.epic { color: #ff55ff; }
+        .product-rarity.rare { color: #55ffff; }
+        .product-rarity.common { color: #aaaaaa; }
+
+        .product-price {
+            font-family: 'VT323', monospace;
+            font-size: 20pt;
+            color: #ffff55;
+            margin-bottom: 15px;
+        }
+
+        .btn-add {
+            width: 100%;
+            background-color: #3c3c3c;
+            border: 2px solid #555555;
+            border-bottom-color: #111;
+            border-right-color: #111;
+            color: #fff;
+            padding: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .btn-add:hover {
+            background-color: #55ff55;
+            color: #000;
+            border-color: #aaffaa;
+        }
+
+        /* Sidebar Cart Panel */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -420px;
+            width: 400px;
+            height: 100%;
+            background-color: #181818;
+            border-left: 4px solid #333333;
+            box-shadow: -5px 0 25px rgba(0,0,0,0.7);
+            z-index: 1000;
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-sidebar.open {
+            right: 0;
+        }
+
+        .cart-header {
+            padding: 20px;
+            background-color: #111111;
+            border-bottom: 3px solid #222222;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-header h2 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 11pt;
+            color: #ffffff;
+        }
+
+        .btn-close-cart {
+            background: transparent;
+            border: none;
+            color: #ff5555;
+            font-size: 20pt;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .cart-items-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .cart-empty-msg {
+            text-align: center;
+            color: #777;
+            margin-top: 40px;
+            font-style: italic;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            background-color: #222;
+            padding: 12px;
+            border: 2px solid #333;
+            margin-bottom: 10px;
+        }
+
+        .cart-item-img {
+            width: 32px;
+            height: 32px;
+            margin-right: 12px;
+            image-rendering: pixelated;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-title {
+            font-weight: bold;
+            font-size: 10pt;
+        }
+
+        .cart-item-price {
+            color: #ffff55;
+            font-size: 9pt;
+        }
+
+        .cart-item-remove {
+            background: none;
+            border: none;
+            color: #ff5555;
+            cursor: pointer;
+            font-weight: bold;
+            padding: 5px;
+        }
+
+        /* Cart Footer Form & Output */
+        .cart-footer {
+            padding: 20px;
+            background-color: #111111;
+            border-top: 3px solid #222222;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12pt;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .cart-total-price {
+            color: #ffff55;
+            font-family: 'VT323', monospace;
+            font-size: 20pt;
+        }
+
+        /* Form Inputs */
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 9pt;
+            color: #aaa;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+
+        .form-input {
+            width: 100%;
+            background-color: #252525;
+            border: 2px solid #444;
+            color: #fff;
+            padding: 10px;
+            font-family: inherit;
+        }
+
+        .form-input:focus {
+            border-color: #55ff55;
+            outline: none;
+        }
+
+        /* MC Command Copy Section */
+        .command-box-container {
+            background-color: #050505;
+            border: 1px dashed #555;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            display: none; /* Shown when items are in cart */
+        }
+
+        .command-label {
+            font-size: 8pt;
+            color: #ffaa00;
+            margin-bottom: 4px;
+            font-weight: bold;
+        }
+
+        .command-text-row {
+            display: flex;
+            align-items: center;
+        }
+
+        .command-code {
+            font-family: monospace;
+            color: #55ff55;
+            font-size: 9pt;
+            white-space: nowrap;
+            overflow-x: auto;
+            flex: 1;
+            padding-right: 5px;
+        }
+
+        .btn-copy {
+            background-color: #333;
+            border: 1px solid #555;
+            color: #fff;
+            font-size: 8pt;
+            padding: 4px 8px;
+            cursor: pointer;
+        }
+
+        .btn-copy:hover {
+            background-color: #444;
+        }
+
+        /* Order Button */
+        .btn-order {
+            width: 100%;
+            background-color: #55ff55;
+            color: #000;
+            border: 3px solid #aaffaa;
+            border-bottom-color: #22aa22;
+            border-right-color: #22aa22;
+            padding: 14px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 9pt;
+            cursor: pointer;
+            transition: all 0.1s;
+        }
+
+        .btn-order:hover {
+            background-color: #66ff66;
+        }
+
+        .btn-order:disabled {
+            background-color: #444;
+            border-color: #555;
+            color: #777;
+            cursor: not-allowed;
+        }
+
+        /* Overlay */
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            z-index: 999;
+            display: none;
+        }
+
+        .cart-overlay.open {
+            display: block;
+        }
+
+        footer {
+            text-align: center;
+            color: #555;
+            font-size: 9pt;
+            margin-top: 40px;
+            padding: 20px;
+            border-top: 1px solid #222;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-accent"></div>
+    
+    <header>
+        <div class="logo-container">
+            <h1>MINE<span>MART</span></h1>
+            <p>Vyber si herní předměty, zadej doručovací souřadnice tvé truhly na serveru, zaplať příkazem a my ti je doručíme.</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="cart-trigger-container">
+            <button class="btn-cart-toggle" onclick="toggleCart()">
+                Košík (<span id="cart-count-nav">0</span>)
+            </button>
+        </div>
+
+        <!-- Products Container -->
+        <div class="products-grid" id="products-grid">
+            <!-- Dynamic Injection -->
+        </div>
+    </div>
+
+    <!-- Sidebar Cart -->
+    <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h2><span style="color:#ffaa00">🛒</span> TVŮJ KOŠÍK</h2>
+            <button class="btn-close-cart" onclick="toggleCart()">&times;</button>
+        </div>
+
+        <div class="cart-items-container" id="cart-items-container">
+            <!-- Dynamic Cart Items -->
+        </div>
+
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>CELKEM:</span>
+                <span class="cart-total-price" id="cart-total-price">0 $</span>
+            </div>
+
+            <!-- MC Command Field -->
+            <div class="command-box-container" id="command-box-container">
+                <div class="command-label">KROK 1: ZAPLAŤ NA SERVERU</div>
+                <div class="command-text-row">
+                    <div class="command-code" id="command-code">/pay Esmoon01 0</div>
+                    <button class="btn-copy" onclick="copyCommand()">Kopírovat</button>
+                </div>
+            </div>
+
+            <!-- Checkout Form -->
+            <form id="checkout-form" onsubmit="handleCheckout(event)">
+                <div class="form-group">
+                    <label for="player-name">Tvoje Herní Jméno (Nick)</label>
+                    <input type="text" id="player-name" class="form-input" placeholder="Např. Notch" required>
+                </div>
+                <div class="form-group">
+                    <label for="player-coords">Doručovací souřadnice (X, Y, Z)</label>
+                    <input type="text" id="player-coords" class="form-input" placeholder="Např. X: 120, Y: 64, Z: -350" required>
+                </div>
+                <button type="submit" class="btn-order" id="btn-submit-order" disabled>
+                    ODESLAT OBJEDNÁVKU
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 MineMart. Minecraft je ochranná známka Mojang Synergies AB. Tento web je fiktivní/komunitní obchod.</p>
+    </footer>
+
+    <script>
+        // --- CONFIGURATION & DATA ---
+        // INITIALIZE EMAILJS - change the Public Key after registration
+        (function() {
+            emailjs.init("1LcJtROefWISQLPUK"); 
+        })();
+
+        const PRODUCTS = [
+            { id: 1, name: "Diamantový Meč", price: 1500, rarity: "epic", img: "https://minecraft.wiki/w/Special:FilePath/Diamond_Sword.png" },
+            { id: 2, name: "Netheritový Ingot", price: 3000, rarity: "epic", img: "https://minecraft.wiki/w/Special:FilePath/Netherite_Ingot.png" },
+            { id: 3, name: "Zlaté Jablko (Enchanted)", price: 2500, rarity: "epic", img: "https://minecraft.wiki/w/Special:FilePath/Enchanted_Golden_Apple.png" },
+            { id: 4, name: "Krumpáč Efektivnost V", price: 1200, rarity: "rare", img: "https://minecraft.wiki/w/Special:FilePath/Diamond_Pickaxe.png" },
+            { id: 5, name: "Ender Perla (16ks)", price: 400, rarity: "common", img: "https://minecraft.wiki/w/Special:FilePath/Ender_Pearl.png" },
+            { id: 6, name: "Tajemná Truhla s překvapením", price: 800, rarity: "rare", img: "https://minecraft.wiki/w/Special:FilePath/Chest.png" },
+            { id: 7, name: "Totem Nesmrtelnosti", price: 2000, rarity: "rare", img: "https://minecraft.wiki/w/Special:FilePath/Totem_of_Undying.png" },
+            { id: 8, name: "Nákovu", price: 300, rarity: "common", img: "https://minecraft.wiki/w/Special:FilePath/Anvil.png" }
+        ];
+
+        let cart = [];
+
+        // --- APP LOGIC ---
+
+        // Render products grid
+        function renderProducts() {
+            const grid = document.getElementById('products-grid');
+            grid.innerHTML = PRODUCTS.map(p => `
+                <div class="product-card">
+                    <div class="product-rarity ${p.rarity}">${p.rarity}</div>
+                    <div class="product-image">
+                        <img src="${p.img}" alt="${p.name}" onerror="this.src='https://minecraft.wiki/w/Special:FilePath/Barrier.png'">
+                    </div>
+                    <div class="product-title">${p.name}</div>
+                    <div class="product-price">${p.price.toLocaleString()} $</div>
+                    <button class="btn-add" onclick="addToCart(${p.id})">Přidat</button>
+                </div>
+            `).join('');
+        }
+
+        // Toggle Sidebar Cart Visibility
+        function toggleCart() {
+            document.getElementById('cart-sidebar').classList.toggle('open');
+            document.getElementById('cart-overlay').classList.toggle('open');
+        }
+
+        // Add item to shopping cart array
+        function addToCart(productId) {
+            const product = PRODUCTS.find(p => p.id === productId);
+            if (product) {
+                cart.push(product);
+                updateCartUI();
+                // Brief alert feedback styled or vanilla
+            }
+        }
+
+        // Remove item from cart array
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        // Update the visual contents of the sidebar
+        function updateCartUI() {
+            // Count
+            document.getElementById('cart-count-nav').innerText = cart.length;
+            
+            const container = document.getElementById('cart-items-container');
+            const commandBox = document.getElementById('command-box-container');
+            const submitBtn = document.getElementById('btn-submit-order');
+
+            if (cart.length === 0) {
+                container.innerHTML = '<div class="cart-empty-msg">Tvůj košík zeje prázdnotou...</div>';
+                document.getElementById('cart-total-price').innerText = "0 $";
+                commandBox.style.display = "none";
+                submitBtn.disabled = true;
+                return;
+            }
+
+            // Render list
+            container.innerHTML = cart.map((item, index) => `
+                <div class="cart-item">
+                    <img class="cart-item-img" src="${item.img}" alt="${item.name}">
+                    <div class="cart-item-details">
+                        <div class="cart-item-title">${item.name}</div>
+                        <div class="cart-item-price">${item.price.toLocaleString()} $</div>
+                    </div>
+                    <button class="cart-item-remove" onclick="removeFromCart(${index})">✕</button>
+                </div>
+            `).join('');
+
+            // Calculate total
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            document.getElementById('cart-total-price').innerText = total.toLocaleString() + " $";
+
+            // Update & Show Minecraft command
+            document.getElementById('command-code').innerText = `/pay Esmoon01 ${total}`;
+            commandBox.style.display = "block";
+            submitBtn.disabled = false;
+        }
+
+        // Copy command helper
+        function copyCommand() {
+            const commandText = document.getElementById('command-code').innerText;
+            navigator.clipboard.writeText(commandText).then(() => {
+                alert("Příkaz zkopírován do schránky! Teď ho vlož do chatu v Minecraftu.");
+            }).catch(err => {
+                console.error("Selhalo kopírování: ", err);
+            });
+        }
+
+        // Send Email via EmailJS
+        function handleCheckout(e) {
+            e.preventDefault();
+
+            const nick = document.getElementById('player-name').value;
+            const coords = document.getElementById('player-coords').value;
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            
+            // Build text list of items purchased
+            const itemsList = cart.map(item => `- ${item.name} (${item.price} $)`).join('\n');
+
+            // Send parameters matching EmailJS template fields
+            const templateParams = {
+                to_email: 'esmoon987@gmail.com',
+                player_name: nick,
+                coordinates: coords,
+                total_price: total + " $",
+                items_ordered: itemsList,
+                pay_command: `/pay Esmoon01 ${total}`
+            };
+
+            const submitBtn = document.getElementById('btn-submit-order');
+            submitBtn.innerText = "ODESÍLÁM...";
+            submitBtn.disabled = true;
+
+            // Note: Update SERVICE_ID and TEMPLATE_ID with real values from EmailJS dashboard
+            emailjs.send('service_zedm13r', 'template_xbcvoe9', templateParams)
+                .then(function(response) {
+                    alert('Objednávka byla úspěšně odeslána! Nezapomeň provést platbu ve hře.');
+                    cart = [];
+                    updateCartUI();
+                    document.getElementById('checkout-form').reset();
+                    toggleCart();
+                    submitBtn.innerText = "ODESLAT OBJEDNÁVKU";
+                }, function(error) {
+                    console.error('FAILED...', error);
+                    alert('Chyba při odesílání objednávky přes EmailJS. Zkontrolujte konfiguraci klíčů.');
+                    submitBtn.innerText = "ODESLAT OBJEDNÁVKU";
+                    submitBtn.disabled = false;
+                });
+        }
+
+        // Run on load
+        window.onload = function() {
+            renderProducts();
+            updateCartUI();
+        };
+    </script>
+</body>
+</html>
