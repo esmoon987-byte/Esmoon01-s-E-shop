@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MineMart - Kontakt</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            background-color: #1a1a1a;
+            background-image: url('https://www.transparenttextures.com/patterns/dark-matter.png');
+            color: #f0f0f0;
+            font-family: 'Ubuntu', sans-serif;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center; /* Kompletní vycentrování na střed (svisle) */
+            min-height: 100vh;   /* Roztáhne pozadí přes celou výšku obrazovky */
+            box-sizing: border-box;
+            margin: 0;
+        }
+        .kontakt-box {
+            max-width: 500px;
+            width: 100%;
+            background-color: #151d2a;
+            border: 3px solid #222c3c;
+            border-radius: 4px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+        .heading {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 14pt;
+            color: #ffffff;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .text {
+            font-size: 11pt;
+            color: #cccccc;
+            margin-bottom: 20px;
+        }
+        .highlight-yellow { color: #ffff55; font-weight: bold; }
+        .highlight-red { color: #ff5555; }
+        
+        .map-placeholder {
+            width: 100%;
+            border: 2px solid #222c3c;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .section-box {
+            background-color: #111722;
+            border: 2px solid #1a2232;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 2px;
+        }
+        .section-title {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 10pt;
+            color: #55ff55;
+            margin-bottom: 12px;
+        }
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            font-family: 'VT323', monospace;
+            font-size: 16pt;
+            margin-bottom: 5px;
+        }
+        .btn-back {
+            display: block;
+            text-align: center;
+            background-color: #3c3c3c;
+            border: 3px solid #555555;
+            border-bottom-color: #111;
+            border-right-color: #111;
+            color: #ffffff;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 8pt;
+            padding: 12px;
+            text-decoration: none;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .btn-back:hover { background-color: #4a4a4a; }
+    </style>
+</head>
+<body>
+
+    <div class="kontakt-box">
+        <div class="heading">📖 Kontakt</div>
+        <div class="text">Mě můžeš kontaktovat na Discordu jako <span class="highlight-yellow">Esmoon01</span>.</div>
+        
+        <!-- Obrázek mapy z tvého GitHubu -->
+        <img class="map-placeholder" src="mapa.png" alt="Mapa prodejny">
+
+        <!-- Sekce Naše prodejna -->
+        <div class="section-box">
+            <div class="section-title">Naše prodejna</div>
+            <div class="info-row" style="justify-content: flex-start; gap: 10px;">
+                <span>🚀 Spawn</span>
+                <span class="highlight-yellow">3811 64 -3196</span>
+            </div>
+            <!-- Klikací e-mail s plnou adresou -->
+<div class="info-row" style="justify-content: flex-start; gap: 10px; font-size: 13pt; font-family: 'Ubuntu', sans-serif; margin-top: 10px;">
+    <span>📩</span>
+    <a href="mailto:esmoon987@gmail.com" style="color: #ffffff; text-decoration: none; font-weight: bold;">esmoon987@gmail.com</a>
+</div>
+        </div>
+
+        <!-- Sekce Otevírací doba -->
+        <div class="section-box">
+            <div class="section-title">Otevírací doba</div>
+            <div class="info-row">
+                <span>Po – Pá:</span>
+                <span class="highlight-yellow">11:00 – 19:00</span>
+            </div>
+            <div class="info-row">
+                <span>So:</span>
+                <span class="highlight-yellow">11:00 – 16:30</span>
+            </div>
+            <div class="info-row">
+                <span>Ne:</span>
+                <span class="highlight-red">Zavřeno</span>
+            </div>
+        </div>
+
+        <a href="https://danl.cz/Esmoon01/esmoon-shop/" class="btn-back">Zpět do obchodu</a>
+    </div>
+
+</body>
+</html>
