@@ -147,14 +147,14 @@
 
         .product-rarity {
             font-size: 9pt;
-            color: #aaa;
             margin-bottom: 12px;
             text-transform: uppercase;
+            font-weight: bold;
         }
 
-        .product-rarity.epic { color: #ff55ff; }
-        .product-rarity.rare { color: #55ffff; }
-        .product-rarity.common { color: #aaaaaa; }
+        /* Styly pro naskladněno / vyprodáno */
+        .product-rarity.naskladneno { color: #55ff55; }
+        .product-rarity.vyprodano { color: #ff5555; }
 
         .product-price {
             font-family: 'VT323', monospace;
@@ -178,10 +178,17 @@
             transition: all 0.1s ease;
         }
 
-        .btn-add:hover {
+        .btn-add:hover:not(:disabled) {
             background-color: #ffffff;
             color: #000;
             border-color: #ffffff;
+        }
+
+        .btn-add:disabled {
+            background-color: #1a1a1a;
+            border-color: #333333;
+            color: #555555;
+            cursor: not-allowed;
         }
 
         .cart-sidebar {
@@ -446,33 +453,33 @@
         const BASE_ITEM  = "https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/1.20/assets/minecraft/textures/item";
 
         const PRODUCTS = [
-            { id: 1,  name: "sugar cane 64x",          price: 1000, rarity: "naskladněno", img: `${BASE_ITEM}/sugar_cane.png` }, 
-            { id: 2,  name: "dirt 64x",                price: 500,  rarity: "naskladněno", img: `${BASE_BLOCK}/dirt.png` },
-            { id: 3,  name: "oak log 64x",             price: 2750, rarity: "naskladněno", img: `${BASE_BLOCK}/oak_log.png` },
-            { id: 4,  name: "cobbled deepslate 64x",   price: 500,  rarity: "vyprodáno", img: `${BASE_BLOCK}/cobbled_deepslate.png` },
-            { id: 5,  name: "copper ingot 64x",        price: 2500, rarity: "naskladněno", img: `${BASE_ITEM}/copper_ingot.png` },
-            { id: 6,  name: "diorite 64x",             price: 1200, rarity: "vyprodáno", img: `${BASE_BLOCK}/diorite.png` },
-            { id: 7,  name: "granite 64x",             price: 1200, rarity: "vyprodáno", img: `${BASE_BLOCK}/granite.png` },
-            { id: 8,  name: "stone bricks 64x",        price: 2000, rarity: "vyprodáno", img: `${BASE_BLOCK}/stone_bricks.png` },
-            { id: 9,  name: "deepslate bricks 64x",    price: 2000, rarity: "vyprodáno", img: `${BASE_BLOCK}/deepslate_bricks.png` },
-            { id: 10, name: "white concrete 64x",      price: 2400, rarity: "vyprodáno", img: `${BASE_BLOCK}/white_concrete.png` },
-            { id: 11, name: "orange concrete 64x",     price: 2400, rarity: "vyprodáno", img: `${BASE_BLOCK}/orange_concrete.png` },
-            { id: 12, name: "magenta concrete 64x",    price: 2400, rarity: "vyprodáno", img: `${BASE_BLOCK}/magenta_concrete.png` },
-            { id: 13, name: "light blue concrete 64x", price: 2400, rarity: "vyprodáno, img: `${BASE_BLOCK}/light_blue_concrete.png` },
-            { id: 14, name: "yellow concrete 64x",     price: 2400, rarity: "vyprodáno", img: `${BASE_BLOCK}/yellow_concrete.png` },
-            { id: 15, name: "lime concrete 64x",       price: 2400, rarity: "vyprodáno", img: `${BASE_BLOCK}/lime_concrete.png` },
-            { id: 16, name: "pink concrete 64x",       price: 2400, rarity: "vyprodáno", img: `${BASE_BLOCK}/pink_concrete.png` },
-            { id: 17, name: "gray concrete 64x",       price: 2400, rarity: "vyprodáno", img: `${BASE_BLOCK}/gray_concrete.png` },
-            { id: 18, name: "light gray concrete 64x", price: 2400, rarity: "vyprodáno, img: `${BASE_BLOCK}/light_gray_concrete.png` },
-            { id: 19, name: "cyan concrete 64x",       price: 2400, rarity: "vyprodáno", img: `${BASE_BLOCK}/cyan_concrete.png` },
-            { id: 20, name: "purple concrete 64x",     price: 2400, rarity: "vyprodáno", img: `${BASE_BLOCK}/purple_concrete.png` },
-            { id: 21, name: "blue concrete 64x",       price: 2400, rarity: "vyprodáno", img: `${BASE_BLOCK}/blue_concrete.png` },
-            { id: 22, name: "brown concrete 64x",      price: 2400, rarity: "vyprodáno", img: `${BASE_BLOCK}/brown_concrete.png` },
-            { id: 23, name: "green concrete 64x",      price: 2400, rarity: "vyprodáno", img: `${BASE_BLOCK}/green_concrete.png` },
-            { id: 24, name: "red concrete 64x",        price: 2400, rarity: "vyprodáno", img: `${BASE_BLOCK}/red_concrete.png` },
-            { id: 25, name: "black concrete 64x",      price: 2400, rarity: "vyprodáno", img: `${BASE_BLOCK}/black_concrete.png` },
-            { id: 26, name: "stone 64x",               price: 1500, rarity: "naskladněno", img: `${BASE_BLOCK}/stone.png` }, 
-            { id: 27, name: "cobblestone 64x",         price: 500,  rarity: "naskladněno", img: `${BASE_BLOCK}/cobblestone.png` }
+            { id: 1,  name: "sugar cane 64x",        price: 1000, rarity: "naskladněno", img: `${BASE_ITEM}/sugar_cane.png` }, 
+            { id: 2,  name: "dirt 64x",              price: 500,  rarity: "naskladněno", img: `${BASE_BLOCK}/dirt.png` },
+            { id: 3,  name: "oak log 64x",           price: 2750, rarity: "naskladněno", img: `${BASE_BLOCK}/oak_log.png` },
+            { id: 4,  name: "cobbled deepslate 64x", price: 500,  rarity: "vyprodáno", img: `${BASE_BLOCK}/cobbled_deepslate.png` },
+            { id: 5,  name: "copper ingot 64x",      price: 2500, rarity: "naskladněno", img: `${BASE_ITEM}/copper_ingot.png` },
+            { id: 6,  name: "diorite 64x",           price: 1200, rarity: "vyprodáno", img: `${BASE_BLOCK}/diorite.png` },
+            { id: 7,  name: "granite 64x",           price: 1200, rarity: "vyprodáno", img: `${BASE_BLOCK}/granite.png` },
+            { id: 8,  name: "stone bricks 64x",      price: 2000, rarity: "vyprodáno", img: `${BASE_BLOCK}/stone_bricks.png` },
+            { id: 9,  name: "deepslate bricks 64x",  price: 2000, rarity: "vyprodáno", img: `${BASE_BLOCK}/deepslate_bricks.png` },
+            { id: 10, name: "white concrete 64x",    price: 2400, rarity: "vyprodáno", img: `${BASE_BLOCK}/white_concrete.png` },
+            { id: 11, name: "orange concrete 64x",   price: 2400, rarity: "vyprodáno", img: `${BASE_BLOCK}/orange_concrete.png` },
+            { id: 12, name: "magenta concrete 64x",  price: 2400, rarity: "vyprodáno", img: `${BASE_BLOCK}/magenta_concrete.png` },
+            { id: 13, name: "light blue concrete 64x", price: 2400, rarity: "vyprodáno", img: `${BASE_BLOCK}/light_blue_concrete.png` },
+            { id: 14, name: "yellow concrete 64x",   price: 2400, rarity: "vyprodáno", img: `${BASE_BLOCK}/yellow_concrete.png` },
+            { id: 15, name: "lime concrete 64x",     price: 2400, rarity: "vyprodáno", img: `${BASE_BLOCK}/lime_concrete.png` },
+            { id: 16, name: "pink concrete 64x",     price: 2400, rarity: "vyprodáno", img: `${BASE_BLOCK}/pink_concrete.png` },
+            { id: 17, name: "gray concrete 64x",     price: 2400, rarity: "vyprodáno", img: `${BASE_BLOCK}/gray_concrete.png` },
+            { id: 18, name: "light gray concrete 64x", price: 2400, rarity: "vyprodáno", img: `${BASE_BLOCK}/light_gray_concrete.png` },
+            { id: 19, name: "cyan concrete 64x",     price: 2400, rarity: "vyprodáno", img: `${BASE_BLOCK}/cyan_concrete.png` },
+            { id: 20, name: "purple concrete 64x",   price: 2400, rarity: "vyprodáno", img: `${BASE_BLOCK}/purple_concrete.png` },
+            { id: 21, name: "blue concrete 64x",     price: 2400, rarity: "vyprodáno", img: `${BASE_BLOCK}/blue_concrete.png` },
+            { id: 22, name: "brown concrete 64x",    price: 2400, rarity: "vyprodáno", img: `${BASE_BLOCK}/brown_concrete.png` },
+            { id: 23, name: "green concrete 64x",    price: 2400, rarity: "vyprodáno", img: `${BASE_BLOCK}/green_concrete.png` },
+            { id: 24, name: "red concrete 64x",      price: 2400, rarity: "vyprodáno", img: `${BASE_BLOCK}/red_concrete.png` },
+            { id: 25, name: "black concrete 64x",    price: 2400, rarity: "vyprodáno", img: `${BASE_BLOCK}/black_concrete.png` },
+            { id: 26, name: "stone 64x",             price: 1500, rarity: "naskladněno", img: `${BASE_BLOCK}/stone.png` }, 
+            { id: 27, name: "cobblestone 64x",       price: 500,  rarity: "naskladněno", img: `${BASE_BLOCK}/cobblestone.png` }
         ];
 
         let cart = [];
@@ -480,15 +487,22 @@
         function renderProducts() {
             const grid = document.getElementById('products-grid');
             if (!grid) return;
-            grid.innerHTML = PRODUCTS.map(p => `
-                <div class="product-card">
-                    <div class="product-rarity ${p.rarity}">${p.rarity}</div>
-                    <div class="product-image"><img src="${p.img}" alt="${p.name}"></div>
-                    <div class="product-title">${p.name}</div>
-                    <div class="product-price">${p.price} $</div>
-                    <button class="btn-add" onclick="addToCart(${p.id})">Přidat</button>
-                </div>
-            `).join('');
+            grid.innerHTML = PRODUCTS.map(p => {
+                const isOut = p.rarity === 'vyprodáno';
+                const rarityClass = isOut ? 'vyprodano' : 'naskladneno';
+                const buttonText = isOut ? 'Vyprodáno' : 'Přidat';
+                const disabledAttr = isOut ? 'disabled' : '';
+
+                return `
+                    <div class="product-card">
+                        <div class="product-rarity ${rarityClass}">${p.rarity}</div>
+                        <div class="product-image"><img src="${p.img}" alt="${p.name}"></div>
+                        <div class="product-title">${p.name}</div>
+                        <div class="product-price">${p.price} $</div>
+                        <button class="btn-add" ${disabledAttr} onclick="addToCart(${p.id})">${buttonText}</button>
+                    </div>
+                `;
+            }).join('');
         }
 
         function toggleCart() {
@@ -498,7 +512,7 @@
 
         function addToCart(productId) {
             const product = PRODUCTS.find(p => p.id === productId);
-            if (product) { cart.push(product); updateCartUI(); }
+            if (product && product.rarity !== 'vyprodáno') { cart.push(product); updateCartUI(); }
         }
 
         function removeFromCart(index) {
