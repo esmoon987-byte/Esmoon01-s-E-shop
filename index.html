@@ -405,13 +405,13 @@
         <div class="cart-footer">
             <div class="cart-total">
                 <span>CELKEM:</span>
-                <span class="cart-total-price" id="cart-total-price">0 $</span>
+                <span class="cart-total-price" id="cart-total-price">0 kr</span>
             </div>
 
             <div class="command-box-container" id="command-box-container">
                 <div class="command-label">KROK 1: ZAPLAŤ NA SERVERU</div>
                 <div class="command-text-row">
-                    <div class="command-code" id="command-code">/paybusiness EaZ_Stavebniny 0 0</div>
+                    <div class="command-code" id="command-code">/paybusiness EaZ_Stavebniny 0 kr</div>
                     <button class="btn-copy" onclick="copyCommand()">Kopírovat</button>
                 </div>
             </div>
@@ -498,7 +498,7 @@
                         <div class="product-rarity ${rarityClass}">${p.rarity}</div>
                         <div class="product-image"><img src="${p.img}" alt="${p.name}"></div>
                         <div class="product-title">${p.name}</div>
-                        <div class="product-price">${p.price} $</div>
+                        <div class="product-price">${p.price} kr</div>
                         <button class="btn-add" ${disabledAttr} onclick="addToCart(${p.id})">${buttonText}</button>
                     </div>
                 `;
@@ -527,7 +527,7 @@
 
             if (cart.length === 0) {
                 container.innerHTML = '<div class="cart-empty-msg">Tvůj košík je prázdný...</div>';
-                document.getElementById('cart-total-price').innerText = "0 $";
+                document.getElementById('cart-total-price').innerText = "0 kr";
                 commandBox.style.display = "none";
                 submitBtn.disabled = true;
                 return;
@@ -538,15 +538,15 @@
                     <img class="cart-item-img" src="${item.img}">
                     <div class="cart-item-details">
                         <div class="cart-item-title">${item.name}</div>
-                        <div class="cart-item-price">${item.price} $</div>
+                        <div class="cart-item-price">${item.price} kr</div>
                     </div>
                     <button class="cart-item-remove" onclick="removeFromCart(${index})">✕</button>
                 </div>
             `).join('');
 
             const total = cart.reduce((sum, item) => sum + item.price, 0);
-            document.getElementById('cart-total-price').innerText = total + " $";
-            document.getElementById('command-code').innerText = `/paybusiness EaZ_Stavebniny ${total} 0`;
+            document.getElementById('cart-total-price').innerText = total + " kr";
+            document.getElementById('command-code').innerText = `/paybusiness EaZ_Stavebniny ${total} kr`;
             commandBox.style.display = "block";
             submitBtn.disabled = false;
         }
@@ -610,9 +610,9 @@
                 to_email: 'esmoon987@gmail.com',
                 player_name: nick,
                 coordinates: coords,
-                total_price: total + " $",
+                total_price: total + " kr",
                 items_ordered: itemsList,
-                pay_command: `/pay Esmoon01 ${total}`,
+                pay_command: `/paybusiness EaZ_Stavebniny ${total} kr`,
                 proof_img: uploadedImageUrl,
                 screenshot_time: screenshotInfo
             };
