@@ -515,7 +515,7 @@
 
             const total = cart.reduce((sum, item) => sum + item.price, 0);
             document.getElementById('cart-total-price').innerText = total + " $";
-            document.getElementById('command-code').innerText = `/pay Esmoon01 ${total}`;
+            document.getElementById('command-code').innerText = `/paybusiness EaZ_Stavebniny (částka) kr{total}`;
             commandBox.style.display = "block";
             submitBtn.disabled = false;
         }
