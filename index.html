@@ -160,8 +160,14 @@
             font-family: 'VT323', monospace;
             font-size: 20pt;
             color: #ffffff;
-            margin-bottom: 15px;
+            margin-bottom: 2px;
             text-shadow: 1px 1px 0px #333;
+        }
+
+        .product-vat-note {
+            font-size: 8pt;
+            color: #888888;
+            margin-bottom: 12px;
         }
 
         .btn-add {
@@ -285,15 +291,22 @@
         .cart-total {
             display: flex;
             justify-content: space-between;
+            align-items: flex-end;
             font-size: 12pt;
             font-weight: bold;
             margin-bottom: 15px;
+        }
+
+        .cart-total-price-wrapper {
+            text-align: right;
         }
 
         .cart-total-price {
             color: #ffffff;
             font-family: 'VT323', monospace;
             font-size: 20pt;
+            display: block;
+            line-height: 1;
         }
 
         .form-group { margin-bottom: 12px; }
@@ -405,7 +418,10 @@
         <div class="cart-footer">
             <div class="cart-total">
                 <span>CELKEM:</span>
-                <span class="cart-total-price" id="cart-total-price">0 kr</span>
+                <div class="cart-total-price-wrapper">
+                    <span class="cart-total-price" id="cart-total-price">0 kr</span>
+                    <span class="product-vat-note" style="margin-bottom:0; display:block;">(cena s DPH)</span>
+                </div>
             </div>
 
             <div class="command-box-container" id="command-box-container">
@@ -499,6 +515,7 @@
                         <div class="product-image"><img src="${p.img}" alt="${p.name}"></div>
                         <div class="product-title">${p.name}</div>
                         <div class="product-price">${p.price} kr</div>
+                        <div class="product-vat-note">(cena s DPH)</div>
                         <button class="btn-add" ${disabledAttr} onclick="addToCart(${p.id})">${buttonText}</button>
                     </div>
                 `;
