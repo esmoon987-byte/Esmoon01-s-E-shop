@@ -132,9 +132,10 @@
         }
 
         .product-image img {
-            max-width: 100%;
-            max-height: 100%;
+            width: 64px;
+            height: 64px;
             object-fit: contain;
+            image-rendering: pixelated;
         }
 
         .product-title {
@@ -440,37 +441,38 @@
             emailjs.init("1LcJtROefWISQLPUK"); 
         })();
 
-        // Použití spolehlivého Minecraft Item CDN
-        const getImg = (id) => `https://mc-heads.net/item/${id}/64`;
+        // Přímé spolehlivé cesty na originální textury v GitHub repozitáři
+        const BASE_BLOCK = "https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/1.20/assets/minecraft/textures/block";
+        const BASE_ITEM  = "https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/1.20/assets/minecraft/textures/item";
 
         const PRODUCTS = [
-            { id: 1, name: "sugar cane 64x", price: 1000, rarity: "common", img: getImg("sugar_cane") },
-            { id: 2, name: "dirt 64x", price: 500, rarity: "common", img: getImg("dirt") },
-            { id: 3, name: "oak log 64x", price: 2750, rarity: "common", img: getImg("oak_log") },
-            { id: 4, name: "cobbled deepslate 64x", price: 500, rarity: "common", img: getImg("cobbled_deepslate") },
-            { id: 5, name: "copper ingot 64x", price: 2500, rarity: "uncommon", img: getImg("copper_ingot") },
-            { id: 6, name: "diorite 64x", price: 1200, rarity: "common", img: getImg("diorite") },
-            { id: 7, name: "granite 64x", price: 1200, rarity: "common", img: getImg("granite") },
-            { id: 8, name: "stone bricks 64x", price: 2000, rarity: "common", img: getImg("stone_bricks") },
-            { id: 9, name: "deepslate bricks 64x", price: 2000, rarity: "common", img: getImg("deepslate_bricks") },
-            { id: 10, name: "white concrete 64x", price: 2400, rarity: "common", img: getImg("white_concrete") },
-            { id: 11, name: "orange concrete 64x", price: 2400, rarity: "common", img: getImg("orange_concrete") },
-            { id: 12, name: "magenta concrete 64x", price: 2400, rarity: "common", img: getImg("magenta_concrete") },
-            { id: 13, name: "light blue concrete 64x", price: 2400, rarity: "common", img: getImg("light_blue_concrete") },
-            { id: 14, name: "yellow concrete 64x", price: 2400, rarity: "common", img: getImg("yellow_concrete") },
-            { id: 15, name: "lime concrete 64x", price: 2400, rarity: "common", img: getImg("lime_concrete") },
-            { id: 16, name: "pink concrete 64x", price: 2400, rarity: "common", img: getImg("pink_concrete") },
-            { id: 17, name: "gray concrete 64x", price: 2400, rarity: "common", img: getImg("gray_concrete") },
-            { id: 18, name: "light gray concrete 64x", price: 2400, rarity: "common", img: getImg("light_gray_concrete") },
-            { id: 19, name: "cyan concrete 64x", price: 2400, rarity: "common", img: getImg("cyan_concrete") },
-            { id: 20, name: "purple concrete 64x", price: 2400, rarity: "common", img: getImg("purple_concrete") },
-            { id: 21, name: "blue concrete 64x", price: 2400, rarity: "common", img: getImg("blue_concrete") },
-            { id: 22, name: "brown concrete 64x", price: 2400, rarity: "common", img: getImg("brown_concrete") },
-            { id: 23, name: "green concrete 64x", price: 2400, rarity: "common", img: getImg("green_concrete") },
-            { id: 24, name: "red concrete 64x", price: 2400, rarity: "common", img: getImg("red_concrete") },
-            { id: 25, name: "black concrete 64x", price: 2400, rarity: "common", img: getImg("black_concrete") },
-            { id: 26, name: "stone 64x", price: 1500, rarity: "common", img: getImg("stone") }, 
-            { id: 27, name: "cobblestone 64x", price: 500, rarity: "common", img: getImg("cobblestone") }
+            { id: 1,  name: "sugar cane 64x",          price: 1000, rarity: "common", img: `${BASE_ITEM}/sugar_cane.png` },
+            { id: 2,  name: "dirt 64x",                price: 500,  rarity: "common", img: `${BASE_BLOCK}/dirt.png` },
+            { id: 3,  name: "oak log 64x",             price: 2750, rarity: "common", img: `${BASE_BLOCK}/oak_log_side.png` },
+            { id: 4,  name: "cobbled deepslate 64x",   price: 500,  rarity: "common", img: `${BASE_BLOCK}/cobbled_deepslate.png` },
+            { id: 5,  name: "copper ingot 64x",        price: 2500, rarity: "uncommon", img: `${BASE_ITEM}/copper_ingot.png` },
+            { id: 6,  name: "diorite 64x",             price: 1200, rarity: "common", img: `${BASE_BLOCK}/diorite.png` },
+            { id: 7,  name: "granite 64x",             price: 1200, rarity: "common", img: `${BASE_BLOCK}/granite.png` },
+            { id: 8,  name: "stone bricks 64x",        price: 2000, rarity: "common", img: `${BASE_BLOCK}/stone_bricks.png` },
+            { id: 9,  name: "deepslate bricks 64x",    price: 2000, rarity: "common", img: `${BASE_BLOCK}/deepslate_bricks.png` },
+            { id: 10, name: "white concrete 64x",      price: 2400, rarity: "common", img: `${BASE_BLOCK}/white_concrete.png` },
+            { id: 11, name: "orange concrete 64x",     price: 2400, rarity: "common", img: `${BASE_BLOCK}/orange_concrete.png` },
+            { id: 12, name: "magenta concrete 64x",    price: 2400, rarity: "common", img: `${BASE_BLOCK}/magenta_concrete.png` },
+            { id: 13, name: "light blue concrete 64x", price: 2400, rarity: "common", img: `${BASE_BLOCK}/light_blue_concrete.png` },
+            { id: 14, name: "yellow concrete 64x",     price: 2400, rarity: "common", img: `${BASE_BLOCK}/yellow_concrete.png` },
+            { id: 15, name: "lime concrete 64x",       price: 2400, rarity: "common", img: `${BASE_BLOCK}/lime_concrete.png` },
+            { id: 16, name: "pink concrete 64x",       price: 2400, rarity: "common", img: `${BASE_BLOCK}/pink_concrete.png` },
+            { id: 17, name: "gray concrete 64x",       price: 2400, rarity: "common", img: `${BASE_BLOCK}/gray_concrete.png` },
+            { id: 18, name: "light gray concrete 64x", price: 2400, rarity: "common", img: `${BASE_BLOCK}/light_gray_concrete.png` },
+            { id: 19, name: "cyan concrete 64x",       price: 2400, rarity: "common", img: `${BASE_BLOCK}/cyan_concrete.png` },
+            { id: 20, name: "purple concrete 64x",     price: 2400, rarity: "common", img: `${BASE_BLOCK}/purple_concrete.png` },
+            { id: 21, name: "blue concrete 64x",       price: 2400, rarity: "common", img: `${BASE_BLOCK}/blue_concrete.png` },
+            { id: 22, name: "brown concrete 64x",      price: 2400, rarity: "common", img: `${BASE_BLOCK}/brown_concrete.png` },
+            { id: 23, name: "green concrete 64x",      price: 2400, rarity: "common", img: `${BASE_BLOCK}/green_concrete.png` },
+            { id: 24, name: "red concrete 64x",        price: 2400, rarity: "common", img: `${BASE_BLOCK}/red_concrete.png` },
+            { id: 25, name: "black concrete 64x",      price: 2400, rarity: "common", img: `${BASE_BLOCK}/black_concrete.png` },
+            { id: 26, name: "stone 64x",               price: 1500, rarity: "common", img: `${BASE_BLOCK}/stone.png` }, 
+            { id: 27, name: "cobblestone 64x",         price: 500,  rarity: "common", img: `${BASE_BLOCK}/cobblestone.png` }
         ];
 
         let cart = [];
