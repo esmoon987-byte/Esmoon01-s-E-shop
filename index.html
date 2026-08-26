@@ -5,10 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EaZ market - Herní Obchod</title>
     <link rel="icon" href="logo.png">
-    <!-- EmailJS SDK -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <style>
-        /* Minecraft Web Style */
         @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Ubuntu:wght@400;700&display=swap');
 
         * {
@@ -38,21 +36,6 @@
             text-align: center;
             border-bottom: 4px solid #222222;
             box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-        }
-
-        .logo-container h1 {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 24pt;
-            color: #ffffff;
-            text-shadow: 3px 3px 0px #3f3f3f;
-            margin-bottom: 10px;
-        }
-
-        header p {
-            font-size: 11pt;
-            color: #aaaaaa;
-            max-width: 600px;
-            margin: 0 auto;
         }
 
         .container {
@@ -121,6 +104,29 @@
             border-color: #ffffff;
         }
 
+        /* Vzhled pro vyprodanou kartu */
+        .product-card.sold-out-card {
+            opacity: 0.6;
+            border-color: #444444;
+        }
+
+        .product-card.sold-out-card:hover {
+            transform: none;
+            border-color: #444444;
+        }
+
+        .sold-out-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #ff3333;
+            color: #ffffff;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 6pt;
+            padding: 4px 6px;
+            border-radius: 3px;
+        }
+
         .product-image {
             width: 64px;
             height: 64px;
@@ -152,7 +158,7 @@
             text-transform: uppercase;
         }
 
-        .product-rarity.epic { color: #ff55ff; }
+        .product-rarity.uncommon { color: #55ff55; }
         .product-rarity.rare { color: #55ffff; }
         .product-rarity.common { color: #aaaaaa; }
 
@@ -178,10 +184,17 @@
             transition: all 0.1s ease;
         }
 
-        .btn-add:hover {
+        .btn-add:hover:not(:disabled) {
             background-color: #ffffff;
             color: #000;
             border-color: #ffffff;
+        }
+
+        .btn-add:disabled {
+            background-color: #222222;
+            border-color: #333333;
+            color: #666666;
+            cursor: not-allowed;
         }
 
         .cart-sidebar {
@@ -199,9 +212,7 @@
             flex-direction: column;
         }
 
-        .cart-sidebar.open {
-            right: 0;
-        }
+        .cart-sidebar.open { right: 0; }
 
         .cart-header {
             padding: 20px;
@@ -254,10 +265,7 @@
             image-rendering: pixelated;
         }
 
-        .cart-item-details {
-            flex: 1;
-        }
-
+        .cart-item-details { flex: 1; }
         .cart-item-title { font-weight: bold; font-size: 10pt; }
         .cart-item-price { color: #ffffff; font-size: 9pt; }
         
@@ -267,6 +275,8 @@
             color: #ff5555;
             cursor: pointer;
             font-weight: bold;
+            font-size: 14pt;
+            padding: 0 5px;
         }
 
         .cart-footer {
@@ -367,10 +377,7 @@
     
     <header>
         <div class="logo-container" style="display: flex; align-items: center; justify-content: center; gap: 25px;">
-            <img src="logo.png?v=2" 
-                 alt="E&Z Logo" 
-                 style="width: 120px; height: auto; display: block; border-radius: 6px;">
-            
+            <img src="logo.png?v=2" alt="E&Z Logo" style="width: 120px; height: auto; display: block; border-radius: 6px;">
             <div>
                 <h1 style="font-family: 'Press Start 2P', cursive; font-size: 24pt; color: #ffffff; text-shadow: 3px 3px 0px #3f3f3f; margin: 0; letter-spacing: 1px;">
                     E&Z market
@@ -441,38 +448,38 @@
             emailjs.init("1LcJtROefWISQLPUK"); 
         })();
 
-        // Přímé spolehlivé cesty na originální textury z GitHub repozitáře
         const BASE_BLOCK = "https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/1.20/assets/minecraft/textures/block";
         const BASE_ITEM  = "https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/1.20/assets/minecraft/textures/item";
 
+        // === ZDE MŮŽEŠ SPRAVOVAT VYPRODANÉ A NASKLADNĚNÉ POLOŽKY (outOfStock: true/false) ===
         const PRODUCTS = [
-            { id: 1,  name: "sugar cane 64x",          price: 1000, rarity: "common",vyprodáno img: `${BASE_ITEM}/sugar_cane.png` },
-            { id: 2,  name: "dirt 64x",                price: 500,  rarity: "common", img: `${BASE_BLOCK}/dirt.png` },
-            { id: 3,  name: "oak log 64x",             price: 2750, rarity: "common", img: `${BASE_BLOCK}/oak_log.png` },
-            { id: 4,  name: "cobbled deepslate 64x",   price: 500,  rarity: "common", img: `${BASE_BLOCK}/cobbled_deepslate.png` },
-            { id: 5,  name: "copper ingot 64x",        price: 2500, rarity: "uncommon", img: `${BASE_ITEM}/copper_ingot.png` },
-            { id: 6,  name: "diorite 64x",             price: 1200, rarity: "common", img: `${BASE_BLOCK}/diorite.png` },
-            { id: 7,  name: "granite 64x",             price: 1200, rarity: "common", img: `${BASE_BLOCK}/granite.png` },
-            { id: 8,  name: "stone bricks 64x",        price: 2000, rarity: "common", img: `${BASE_BLOCK}/stone_bricks.png` },
-            { id: 9,  name: "deepslate bricks 64x",    price: 2000, rarity: "common", img: `${BASE_BLOCK}/deepslate_bricks.png` },
-            { id: 10, name: "white concrete 64x",      price: 2400, rarity: "common", img: `${BASE_BLOCK}/white_concrete.png` },
-            { id: 11, name: "orange concrete 64x",     price: 2400, rarity: "common", img: `${BASE_BLOCK}/orange_concrete.png` },
-            { id: 12, name: "magenta concrete 64x",    price: 2400, rarity: "common", img: `${BASE_BLOCK}/magenta_concrete.png` },
-            { id: 13, name: "light blue concrete 64x", price: 2400, rarity: "common", img: `${BASE_BLOCK}/light_blue_concrete.png` },
-            { id: 14, name: "yellow concrete 64x",     price: 2400, rarity: "common", img: `${BASE_BLOCK}/yellow_concrete.png` },
-            { id: 15, name: "lime concrete 64x",       price: 2400, rarity: "common", img: `${BASE_BLOCK}/lime_concrete.png` },
-            { id: 16, name: "pink concrete 64x",       price: 2400, rarity: "common", img: `${BASE_BLOCK}/pink_concrete.png` },
-            { id: 17, name: "gray concrete 64x",       price: 2400, rarity: "common", img: `${BASE_BLOCK}/gray_concrete.png` },
-            { id: 18, name: "light gray concrete 64x", price: 2400, rarity: "common", img: `${BASE_BLOCK}/light_gray_concrete.png` },
-            { id: 19, name: "cyan concrete 64x",       price: 2400, rarity: "common", img: `${BASE_BLOCK}/cyan_concrete.png` },
-            { id: 20, name: "purple concrete 64x",     price: 2400, rarity: "common", img: `${BASE_BLOCK}/purple_concrete.png` },
-            { id: 21, name: "blue concrete 64x",       price: 2400, rarity: "common", img: `${BASE_BLOCK}/blue_concrete.png` },
-            { id: 22, name: "brown concrete 64x",      price: 2400, rarity: "common", img: `${BASE_BLOCK}/brown_concrete.png` },
-            { id: 23, name: "green concrete 64x",      price: 2400, rarity: "common", img: `${BASE_BLOCK}/green_concrete.png` },
-            { id: 24, name: "red concrete 64x",        price: 2400, rarity: "common", img: `${BASE_BLOCK}/red_concrete.png` },
-            { id: 25, name: "black concrete 64x",      price: 2400, rarity: "common", img: `${BASE_BLOCK}/black_concrete.png` },
-            { id: 26, name: "stone 64x",               price: 1500, rarity: "common", img: `${BASE_BLOCK}/stone.png` }, 
-            { id: 27, name: "cobblestone 64x",         price: 500,  rarity: "common", img: `${BASE_BLOCK}/cobblestone.png` }
+            { id: 1,  name: "sugar cane 64x",         price: 1000, rarity: "common",   img: `${BASE_ITEM}/sugar_cane.png`,          outOfStock: false },  // VYPRODÁNO
+            { id: 2,  name: "dirt 64x",               price: 500,  rarity: "common",   img: `${BASE_BLOCK}/dirt.png`,               outOfStock: false },
+            { id: 3,  name: "oak log 64x",             price: 2750, rarity: "common",   img: `${BASE_BLOCK}/oak_log_side.png`,       outOfStock: false },
+            { id: 4,  name: "cobbled deepslate 64x",  price: 500,  rarity: "common",   img: `${BASE_BLOCK}/cobbled_deepslate.png`,  outOfStock: false },
+            { id: 5,  name: "copper ingot 64x",        price: 2500, rarity: "uncommon", img: `${BASE_ITEM}/copper_ingot.png`,         outOfStock: false },  // VYPRODÁNO
+            { id: 6,  name: "diorite 64x",             price: 1200, rarity: "common",   img: `${BASE_BLOCK}/diorite.png`,            outOfStock: false },
+            { id: 7,  name: "granite 64x",             price: 1200, rarity: "common",   img: `${BASE_BLOCK}/granite.png`,            outOfStock: false },
+            { id: 8,  name: "stone bricks 64x",        price: 2000, rarity: "common",   img: `${BASE_BLOCK}/stone_bricks.png`,       outOfStock: false },
+            { id: 9,  name: "deepslate bricks 64x",    price: 2000, rarity: "common",   img: `${BASE_BLOCK}/deepslate_bricks.png`,   outOfStock: false },
+            { id: 10, name: "white concrete 64x",      price: 2400, rarity: "common",   img: `${BASE_BLOCK}/white_concrete.png`,     outOfStock: false },  // VYPRODÁNO
+            { id: 11, name: "orange concrete 64x",     price: 2400, rarity: "common",   img: `${BASE_BLOCK}/orange_concrete.png`,    outOfStock: false },  // VYPRODÁNO
+            { id: 12, name: "magenta concrete 64x",    price: 2400, rarity: "common",   img: `${BASE_BLOCK}/magenta_concrete.png`,   outOfStock: false },
+            { id: 13, name: "light blue concrete 64x", price: 2400, rarity: "common",   img: `${BASE_BLOCK}/light_blue_concrete.png`,outOfStock: false },
+            { id: 14, name: "yellow concrete 64x",     price: 2400, rarity: "common",   img: `${BASE_BLOCK}/yellow_concrete.png`,    outOfStock: false },
+            { id: 15, name: "lime concrete 64x",       price: 2400, rarity: "common",   img: `${BASE_BLOCK}/lime_concrete.png`,      outOfStock: false },
+            { id: 16, name: "pink concrete 64x",       price: 2400, rarity: "common",   img: `${BASE_BLOCK}/pink_concrete.png`,      outOfStock: false },
+            { id: 17, name: "gray concrete 64x",       price: 2400, rarity: "common",   img: `${BASE_BLOCK}/gray_concrete.png`,      outOfStock: false },
+            { id: 18, name: "light gray concrete 64x", price: 2400, rarity: "common",   img: `${BASE_BLOCK}/light_gray_concrete.png`,outOfStock: false },
+            { id: 19, name: "cyan concrete 64x",       price: 2400, rarity: "common",   img: `${BASE_BLOCK}/cyan_concrete.png`,      outOfStock: false },
+            { id: 20, name: "purple concrete 64x",     price: 2400, rarity: "common",   img: `${BASE_BLOCK}/purple_concrete.png`,    outOfStock: false },
+            { id: 21, name: "blue concrete 64x",       price: 2400, rarity: "common",   img: `${BASE_BLOCK}/blue_concrete.png`,      outOfStock: false },
+            { id: 22, name: "brown concrete 64x",      price: 2400, rarity: "common",   img: `${BASE_BLOCK}/brown_concrete.png`,     outOfStock: false },
+            { id: 23, name: "green concrete 64x",      price: 2400, rarity: "common",   img: `${BASE_BLOCK}/green_concrete.png`,     outOfStock: false },
+            { id: 24, name: "red concrete 64x",        price: 2400, rarity: "common",   img: `${BASE_BLOCK}/red_concrete.png`,       outOfStock: false },
+            { id: 25, name: "black concrete 64x",      price: 2400, rarity: "common",   img: `${BASE_BLOCK}/black_concrete.png`,     outOfStock: false },
+            { id: 26, name: "stone 64x",               price: 1500, rarity: "common",   img: `${BASE_BLOCK}/stone.png`,              outOfStock: false }, 
+            { id: 27, name: "cobblestone 64x",         price: 500,  rarity: "common",   img: `${BASE_BLOCK}/cobblestone.png`,        outOfStock: false }
         ];
 
         let cart = [];
@@ -480,15 +487,25 @@
         function renderProducts() {
             const grid = document.getElementById('products-grid');
             if (!grid) return;
-            grid.innerHTML = PRODUCTS.map(p => `
-                <div class="product-card">
-                    <div class="product-rarity ${p.rarity}">${p.rarity}</div>
-                    <div class="product-image"><img src="${p.img}" alt="${p.name}"></div>
-                    <div class="product-title">${p.name}</div>
-                    <div class="product-price">${p.price} $</div>
-                    <button class="btn-add" onclick="addToCart(${p.id})">Přidat</button>
-                </div>
-            `).join('');
+
+            grid.innerHTML = PRODUCTS.map(p => {
+                const isSoldOut = p.outOfStock === true;
+
+                return `
+                    <div class="product-card ${isSoldOut ? 'sold-out-card' : ''}">
+                        ${isSoldOut ? '<div class="sold-out-badge">VYPRODÁNO</div>' : ''}
+                        <div class="product-rarity ${p.rarity}">${p.rarity}</div>
+                        <div class="product-image"><img src="${p.img}" alt="${p.name}"></div>
+                        <div class="product-title">${p.name}</div>
+                        <div class="product-price">${isSoldOut ? 'VYPRODÁNO' : p.price + ' $'}</div>
+                        <button class="btn-add" 
+                                onclick="addToCart(${p.id})" 
+                                ${isSoldOut ? 'disabled' : ''}>
+                            ${isSoldOut ? 'VYPRODÁNO' : 'Přidat'}
+                        </button>
+                    </div>
+                `;
+            }).join('');
         }
 
         function toggleCart() {
@@ -498,15 +515,26 @@
 
         function addToCart(productId) {
             const product = PRODUCTS.find(p => p.id === productId);
-            if (product) { cart.push(product); updateCartUI(); }
+            if (!product || product.outOfStock) return; // Zamezí přidání vyprodané položky
+
+            const existingItem = cart.find(item => item.id === productId);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+            updateCartUI();
         }
 
-        function removeFromCart(index) {
-            cart.splice(index, 1); updateCartUI();
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            updateCartUI();
         }
 
         function updateCartUI() {
-            document.getElementById('cart-count-nav').innerText = cart.length;
+            const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cart-count-nav').innerText = totalCount;
+            
             const container = document.getElementById('cart-items-container');
             const commandBox = document.getElementById('command-box-container');
             const submitBtn = document.getElementById('btn-submit-order');
@@ -519,18 +547,18 @@
                 return;
             }
 
-            container.innerHTML = cart.map((item, index) => `
+            container.innerHTML = cart.map((item) => `
                 <div class="cart-item">
                     <img class="cart-item-img" src="${item.img}">
                     <div class="cart-item-details">
-                        <div class="cart-item-title">${item.name}</div>
-                        <div class="cart-item-price">${item.price} $</div>
+                        <div class="cart-item-title">${item.name} (${item.quantity}x)</div>
+                        <div class="cart-item-price">${item.price * item.quantity} $</div>
                     </div>
-                    <button class="cart-item-remove" onclick="removeFromCart(${index})">✕</button>
+                    <button class="cart-item-remove" onclick="removeFromCart(${item.id})">✕</button>
                 </div>
             `).join('');
 
-            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             document.getElementById('cart-total-price').innerText = total + " $";
             document.getElementById('command-code').innerText = `/paybusiness EaZ_market ${total} 0`;
             commandBox.style.display = "block";
@@ -565,8 +593,8 @@
             const nick = document.getElementById('player-name').value;
             const coords = document.getElementById('player-coords').value;
             const fileInput = document.getElementById('player-proof');
-            const total = cart.reduce((sum, item) => sum + item.price, 0);
-            const itemsList = cart.map(item => `- ${item.name}`).join('\n');
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const itemsList = cart.map(item => `- ${item.name} (${item.quantity}x)`).join('\n');
 
             const submitBtn = document.getElementById('btn-submit-order');
             submitBtn.innerText = "NAHRÁVÁM OBRÁZEK...";
@@ -598,7 +626,7 @@
                 coordinates: coords,
                 total_price: total + " $",
                 items_ordered: itemsList,
-                pay_command: `/pay Esmoon01 ${total}`,
+                pay_command: `/paybusiness EaZ_market ${total} 0`,
                 proof_img: uploadedImageUrl,
                 screenshot_time: screenshotInfo
             };
