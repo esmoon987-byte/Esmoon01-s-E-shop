@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E&Z market - Herní Obchod</title>
+    <title>EaZ market - Herní Obchod</title>
     <link rel="icon" href="logo.png">
     <!-- EmailJS SDK -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
@@ -404,7 +404,7 @@
             <div class="command-box-container" id="command-box-container">
                 <div class="command-label">KROK 1: ZAPLAŤ NA SERVERU</div>
                 <div class="command-text-row">
-                    <div class="command-code" id="command-code">/paybusiness E&Z_market 0 0</div>
+                    <div class="command-code" id="command-code">/paybusiness EaZ_market 0 0</div>
                     <button class="btn-copy" onclick="copyCommand()">Kopírovat</button>
                 </div>
             </div>
@@ -430,7 +430,7 @@
     </div>
 
     <footer>
-        <p>&copy; 2026 E&Z market. Minecraft je ochranná známka Mojang Synergies AB.</p>
+        <p>&copy; 2026 EaZ market. Minecraft je ochranná známka Mojang Synergies AB.</p>
         <a href="podminky.html">Obchodni podminky</a>
     </footer>
 
@@ -532,7 +532,7 @@
 
             const total = cart.reduce((sum, item) => sum + item.price, 0);
             document.getElementById('cart-total-price').innerText = total + " $";
-            document.getElementById('command-code').innerText = `/paybusiness E&Z_market ${total} 0`;
+            document.getElementById('command-code').innerText = `/paybusiness EaZ_market ${total} 0`;
             commandBox.style.display = "block";
             submitBtn.disabled = false;
         }
