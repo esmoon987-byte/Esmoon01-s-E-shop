@@ -441,9 +441,7 @@
 
     <script>
         const IMGBB_API_KEY = "bd4cb6403ae8aff89e11dc486c14c106";
-        
-        // ZDE SI VLOŽ TU SVOU URL ADRESU DISCORD WEBHOOKU
-        const https://discord.com/api/webhooks/1542521408125407284/Q5oNIox62Nt9uqeHVRXz-kWVoV1Cdo_vtMjDNP9SQE3sRPn2pBGLGgV6NCDVnGXPedmB = "SEM_VLOZ_URL_https://discord.com/api/webhooks/1542521408125407284/Q5oNIox62Nt9uqeHVRXz-kWVoV1Cdo_vtMjDNP9SQE3sRPn2pBGLGgV6NCDVnGXPedmB";
+        const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1542521408125407284/Q5oNIox62Nt9uqeHVRXz-kWVoV1Cdo_vtMjDNP9SQE3sRPn2pBGLGgV6NCDVnGXPedmB";
 
         const BASE_BLOCK = "https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/1.20/assets/minecraft/textures/block";
         const BASE_ITEM  = "https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/1.20/assets/minecraft/textures/item";
@@ -613,12 +611,11 @@
 
             submitBtn.innerText = "ODESÍLÁM NA DISCORD...";
 
-            // Tělo zprávy pro Discord Webhook (Discord Embed)
             const discordPayload = {
                 content: "🔔 **Nová objednávka v EaZ marketu!**",
                 embeds: [{
                     title: "🛒 Podrobnosti objednávky",
-                    color: 5814783, // Pěkná modro-fialová / neutrální barva okraje
+                    color: 5814783,
                     fields: [
                         { name: "👤 Hráč (Nick)", value: nick, inline: true },
                         { name: "📍 Souřadnice", value: coords, inline: true },
